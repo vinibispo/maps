@@ -1,47 +1,53 @@
 {
   "env": {
-    "es2021": true
+    "es6": true
   },
   "extends": [
-    "eslint:recommended",
     "plugin:react/recommended",
+    "standard",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "prettier/standard",
-    "prettier/react"
+    "prettier"
   ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "__DEV__": "readonly"
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-hooks",
+    "prettier"
+  ],
   "rules": {
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "never"],
-    "prettier/prettier": "error",
-    "no-unused-vars": "warn",
-    "keyword-spacing": "error",
-    "space-before-function-paren": "off",
-    "eqeqeq": "error",
-    "space-infix-ops": "error",
-    "comma-spacing": "error",
-    "brace-style": "error",
-    "curly": "error",
-    "no-undef": "error",
-    "operator-linebreak": "error",
-    "no-var": "error",
-    "block-spacing": "error",
-    "dot-location": "error",
-    "eol-last": "error",
-    "func-call-spacing": "error",
-    "key-spacing": "error",
-    "accessor-pairs": "error",
-    "react/proptypes": "off"
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": [
+      1,
+      {"extensions": [".tsx"]}
+    ],
+    "import/prefer-default-import": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "prettier/prettier": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
   }
 }

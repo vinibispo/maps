@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
-  StatusBar
+  StatusBar,
 } from 'react-native'
 
 MapboxGL.setAccessToken(
@@ -31,16 +31,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   container: {
     height: 800,
     width: 300,
-    backgroundColor: 'tomato'
+    backgroundColor: 'tomato',
   },
   map: {
-    flex: 1
-  }
+    flex: 1,
+  },
 })
 
 export default App
