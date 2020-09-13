@@ -12,6 +12,6 @@ export const Page = styled.View`
 `
 export const Container = styled.View`
   height: 800px;
-  width: 300px;
+  width: 400px;
   background-color: tomato;
 `
