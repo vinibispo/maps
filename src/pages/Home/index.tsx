@@ -4,7 +4,7 @@ import React, {
   useState,
 } from 'react'
 import MapboxGL from '@react-native-mapbox-gl/maps'
-import {Map, Page, Container} from './styles'
+import {Map, Page, Container, Point} from './styles'
 import {SafeAreaView} from 'react-native'
 import api from '../../services/api'
 
@@ -19,26 +19,57 @@ interface Parada {
   px: number
   ed: string
 }
+interface Veiculo {
+  p: number
+  a: boolean
+  ta: string
+  py: string
+  px: string
+}
+interface Linha {
+  c: string
+  cl: number
+  sl: number
+  lt0: string
+  lt1: number
+  tp: string
+  ts: string
+  vs: Veiculo[]
+}
+interface Posicao {
+  hr: string
+  l: Linha[]
+}
 const Home: React.FC = () => {
   const [isApiLoaded, setIsApiLoaded] = useState(false)
   const [parada, setParada] = useState<Parada[]>([])
+  const [posicao, setPosicao] = useState<Posicao[]>([])
   const loadData = useCallback(async () => {
-    const [
-      responseAuth,
-      responseParada,
-    ] = await Promise.all([
-      api.post(
-        '/Login/Autenticar?token=4648c776c939754bc50baab18bcd66093647cc68ceb017f40d65362582c8d8d5'
-      ),
-      api.get('/Parada/Buscar?termosBusca'),
-    ])
-    setIsApiLoaded(responseAuth.data)
-    setParada(responseParada.data)
-    console.log(JSON.stringify(parada[0]))
+    try {
+      const [
+        responseAuth,
+        responseParada,
+        responsePosicao,
+      ] = await Promise.all([
+        api.post(
+          '/Login/Autenticar?token=4648c776c939754bc50baab18bcd66093647cc68ceb017f40d65362582c8d8d5'
+        ),
+        api.get('/Parada/Buscar?termosBusca'),
+        api.get('Posicao'),
+      ])
+      setIsApiLoaded(responseAuth.data)
+      setParada(responseParada.data)
+      setPosicao(responsePosicao.data)
+    } catch (err) {
+      console.log(err.message)
+    }
   }, [])
   useEffect(() => {
     loadData()
   }, [loadData])
+  useEffect(() => {
+    console.log(posicao)
+  }, [posicao])
   return (
     <SafeAreaView style={{flex: 1}}>
       <Page>

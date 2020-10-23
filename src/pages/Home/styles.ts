@@ -15,3 +15,8 @@ export const Container = styled.View`
   width: 400px;
   background-color: tomato;
 `
+export const Point = styled.View`
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+`
